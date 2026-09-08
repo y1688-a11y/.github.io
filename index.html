@@ -17,13 +17,13 @@
 <body>
     <div class="box">
         <h3>请完成付款</h3>
-        <p id="msg">正在加载收款码...</p>
+        <p id="msg">正在加载收款页面...</p>
 
-        <!-- =========这里粘贴支付宝收款码图片的ImgBB直链========== -->
+        <!-- 支付宝收款码图片，替换src为imgbb直链 -->
         <img id="alipayPic" class="pay-img" style="display:none;" src="https://s41.ax1x.com/2026/09/09/pnVVyn0.jpg" alt="支付宝收款码">
         <p class="tip" id="alipayTip" style="display:none;">长按图片保存，打开支付宝扫一扫</p>
 
-        <!-- =========这里粘贴微信收款码图片的ImgBB直链========== -->
+        <!-- 微信收款码图片，替换src为imgbb直链 -->
         <img id="wechatPic" class="pay-img" style="display:none;" src="https://s41.ax1x.com/2026/09/09/pnVV6BV.jpg" alt="微信收款码">
         <p class="tip" id="wechatTip" style="display:none;">长按图片，识别二维码付款</p>
 
@@ -31,11 +31,8 @@
     </div>
 
 <script>
-// =========收款链接配置区==========
-const aliPayUrl ="alipays://platformapi/startapp=10000007&qrcode=https%3A%2F%2Fqr.alipay.com%2F2m611901mj5q12vyvj3924f%3Ft%3D1769061593447";
-const wechatPayUrl = "wxp://f2f0tWqJbl67Nyved5O_eC2rp3yN1_rFDAt4eTM4fFdRDf-8jMPnwJ87l5vMmEe5qVB3";
-// ========================================
-
+// =========在这里填入你拼接好的 alipays:// 链接==========
+const aliPayUrl = "alipays://platformapi/startapp?saId=10000007&qrcode=https%3A%2F%2Fqr.alipay.com%2F2m611901mj5q12vyvj3924f%3Ft%3D1769061593447";
 const ua = navigator.userAgent.toLowerCase();
 let targetUrl = "";
 const msgDom = document.getElementById('msg');
@@ -50,26 +47,23 @@ if(ua.match(/MicroMessenger/i)){
     wechatPic.style.display = "block";
     wechatTip.style.display = "block";
 }
-//支付宝App
+//支付宝App内打开，直接用alipays协议唤起
 else if(ua.match(/Alipay/i)){
     msgDom.innerText = "正在唤起支付宝付款页面";
-    window.location.href = alipaysUrl;
-    manualLink.style.display = "block";
-    manualLink.href = alipaysUrl;
+    targetUrl = aliPayUrl;
 }
-//其他浏览器
+//普通浏览器
 else{
-    msgDom.innerText = "请选择付款方式";
+    msgDom.innerText = "请选择微信或者支付宝付款";
     alipayPic.style.display = "block";
     alipayTip.style.display = "block";
     wechatPic.style.display = "block";
     wechatTip.style.display = "block";
-    targetUrl = aliPayUrl;
 }
 
 if(targetUrl){
     window.location.href = targetUrl;
-    document.getElementById("link-box").innerHTML = `<a href="${targetUrl}" style="color:#0066cc">点击手动跳转</a>`
+    document.getElementById("link-box").innerHTML = `<a href="${targetUrl}" style="color:#0066cc;">手动唤起支付宝</a>`
 }
 </script>
 </body>
