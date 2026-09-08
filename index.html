@@ -19,12 +19,12 @@
         <h3>请完成付款</h3>
         <p id="msg">正在加载收款码...</p>
 
-        <!--支付宝收款码图片，替换src引号内为支付宝图片https链接-->
-        <img id="alipayPic" class="pay-img" style="display:none;" src="https://s41.ax1x.com/2026/09/09/pnVVyn0.jpg">
+        <!-- =========这里粘贴支付宝收款码图片的ImgBB直链========== -->
+        <img id="alipayPic" class="pay-img" style="display:none;" src="https://s41.ax1x.com/2026/09/09/pnVVyn0.jpg" alt="支付宝收款码">
         <p class="tip" id="alipayTip" style="display:none;">长按图片保存，打开支付宝扫一扫</p>
 
-        <!--微信收款码图片，替换src引号内为微信图片https链接-->
-        <img id="wechatPic" class="pay-img" style="display:none;" src="https://s41.ax1x.com/2026/09/09/pnVV6BV.jpg">
+        <!-- =========这里粘贴微信收款码图片的ImgBB直链========== -->
+        <img id="wechatPic" class="pay-img" style="display:none;" src="https://s41.ax1x.com/2026/09/09/pnVV6BV.jpg" alt="微信收款码">
         <p class="tip" id="wechatTip" style="display:none;">长按图片，识别二维码付款</p>
 
         <div id="link-box"></div>
@@ -33,7 +33,6 @@
 <script>
 // =========收款链接配置区==========
 const aliPayUrl = "https://ur.alipay.com/_4i4NC0Dr5blz1FLaZQtRxH";
-//微信个人收款没有可直接跳转的http链接，留空
 const wechatPayUrl = "";
 // ========================================
 
@@ -63,27 +62,6 @@ else{
     alipayTip.style.display = "block";
     wechatPic.style.display = "block";
     wechatTip.style.display = "block";
-    targetUrl = aliPayUrl;
-}
-
-if(targetUrl){
-    window.location.href = targetUrl;
-    document.getElementById("link-box").innerHTML = `<a href="${targetUrl}" style="color:#0066cc">点击手动跳转</a>`
-}
-</script>
-</body>
-</html>
-
-    msgDom.innerText = "微信内无法直接唤起支付宝，请扫描下方二维码";
-    picDom.style.display = "block";
-    picTipDom.style.display = "block";
-    // 如果你填写了微信收款链接，取消下面这行注释，微信内就会跳微信支付
-    // targetUrl = wechatPayUrl;
-}else if(ua.match(/Alipay/i)){
-    //支付宝App内，直接跳转支付宝收款链接
-    targetUrl = aliPayUrl;
-}else{
-    //外部浏览器默认跳转支付宝
     targetUrl = aliPayUrl;
 }
 
