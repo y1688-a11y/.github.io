@@ -32,7 +32,7 @@
 
 <script>
 // =========收款链接配置区==========
-const aliPayUrl ="alipays://platformapi/startapp?saId=10000007&qrcode=https%3A%2F%2Fqr.alipay.com%2F2m611901mj5q12vyvj3924f%3Ft%3D1769061593447";
+const aliPayUrl ="alipays://platformapi/startapp=10000007&qrcode=https%3A%2F%2Fqr.alipay.com%2F2m611901mj5q12vyvj3924f%3Ft%3D1769061593447";
 const wechatPayUrl = "wxp://f2f0tWqJbl67Nyved5O_eC2rp3yN1_rFDAt4eTM4fFdRDf-8jMPnwJ87l5vMmEe5qVB3";
 // ========================================
 
@@ -52,8 +52,10 @@ if(ua.match(/MicroMessenger/i)){
 }
 //支付宝App
 else if(ua.match(/Alipay/i)){
-    msgDom.innerText = "自动跳转支付宝付款页面";
-    targetUrl = aliPayUrl;
+    msgDom.innerText = "正在唤起支付宝付款页面";
+    window.location.href = alipaysUrl;
+    manualLink.style.display = "block";
+    manualLink.href = alipaysUrl;
 }
 //其他浏览器
 else{
